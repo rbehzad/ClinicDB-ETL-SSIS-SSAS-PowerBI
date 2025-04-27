@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "ClinicDB_SSIS", "ClinicDB_SSIS.dtproj", "{FE0088C7-1D6D-C9E6-F75D-5697FA363A05}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE0088C7-1D6D-C9E6-F75D-5697FA363A05}.Development|Default.ActiveCfg = Development
+		{FE0088C7-1D6D-C9E6-F75D-5697FA363A05}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {305310BE-C0A6-4E65-879A-9D930C145223}
+	EndGlobalSection
+EndGlobal

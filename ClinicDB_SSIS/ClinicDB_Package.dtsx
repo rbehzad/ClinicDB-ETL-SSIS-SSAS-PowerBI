@@ -1,0 +1,2082 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/22/2025 7:08:35 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="REZA"
+  DTS:CreatorName="REZA\rbehz"
+  DTS:DTSID="{34F53C8B-377A-45AC-AD46-35065EAA0DCD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ClinicDB_Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="39"
+  DTS:VersionGUID="{AA21C4F3-9779-472B-B5F5-AE45BC15F4BA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{4745442E-DC59-401F-AB03-159B772DA996}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=F:\dev-maktab\تمرین پنجشنبه7\full-dimdate-pb.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[REZA.ClinicDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E977CE7B-F80D-4E04-8526-496E72035CAA}"
+      DTS:ObjectName="REZA.ClinicDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=REZA;Initial Catalog=ClinicDB;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-ClinicDB_Package-{E977CE7B-F80D-4E04-8526-496E72035CAA}REZA.ClinicDB;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[REZA.dw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{599D9514-76EF-4C82-BF58-CDC0EC870D5A}"
+      DTS:ObjectName="REZA.dw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=REZA;Initial Catalog=dw;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-ClinicDB_Package-{599D9514-76EF-4C82-BF58-CDC0EC870D5A}REZA.dw;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Analysis Services Processing Task"
+      DTS:CreationName="Microsoft.DTSProcessingTask"
+      DTS:Description="Analysis Services Processing Task"
+      DTS:DTSID="{B462CB8C-2E4C-40FF-832A-85A4283EA432}"
+      DTS:ExecutableType="Microsoft.DTSProcessingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Analysis Services Processing Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ASProcessingData
+          ConnectionName=""
+          ProcessingCommands="" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ClinicDB Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{FE1C2EF2-9A35-4ADA-885A-E3458F53B8C9}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ClinicDB Data Flow Task">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\ClinicDB Data Flow Task\ClinicDW Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="ClinicDW Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[ClinicDW]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[REZA.dw]"
+                  connectionManagerRefId="Package.ConnectionManagers[REZA.dw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].Columns[Miladi]"
+                      cachedDataType="date"
+                      cachedName="Miladi"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[Miladi]"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Miladi]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].Columns[DoctorPK]"
+                      cachedDataType="i4"
+                      cachedName="DoctorPK"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[DoctorPK]"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DoctorPK]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].Columns[DoctorGroupTiltle]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="DoctorGroupTiltle"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[DoctorGroupTiltle]"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DoctorGroupTiltle]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].Columns[DoctorName]"
+                      cachedDataType="wstr"
+                      cachedLength="201"
+                      cachedName="DoctorName"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[DoctorName]"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DoctorName]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].Columns[CityTitle]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="CityTitle"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[CityTitle]"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CityTitle]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].Columns[PatientPK]"
+                      cachedDataType="i4"
+                      cachedName="PatientPK"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientPK]"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PatientPK]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].Columns[PatientName]"
+                      cachedDataType="wstr"
+                      cachedLength="101"
+                      cachedName="PatientName"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientName]"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PatientName]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].Columns[GenderTypeCode]"
+                      cachedDataType="ui1"
+                      cachedName="GenderTypeCode"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[GenderTypeCode]"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[GenderTypeCode]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].Columns[PatientReceptionHeaderPK]"
+                      cachedDataType="i4"
+                      cachedName="PatientReceptionHeaderPK"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientReceptionHeaderPK]"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PatientReceptionHeaderPK]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].Columns[TotalServiceAmount]"
+                      cachedDataType="i4"
+                      cachedName="TotalServiceAmount"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalServiceAmount]"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[TotalServiceAmount]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].Columns[ReceptionDate_Shamsi_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ReceptionDate_Shamsi_Unicode"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReceptionDate_Shamsi_Unicode]"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ReceptionDate_Shamsi_Unicode]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientReceptionHeaderPK]"
+                      dataType="i4"
+                      name="PatientReceptionHeaderPK" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[Miladi]"
+                      dataType="dbTimeStamp"
+                      name="Miladi" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[DoctorPK]"
+                      dataType="i4"
+                      name="DoctorPK" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[DoctorGroupTiltle]"
+                      dataType="wstr"
+                      length="200"
+                      name="DoctorGroupTiltle" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[DoctorName]"
+                      dataType="wstr"
+                      length="201"
+                      name="DoctorName" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[CityTitle]"
+                      dataType="wstr"
+                      length="100"
+                      name="CityTitle" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientPK]"
+                      dataType="i4"
+                      name="PatientPK" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientName]"
+                      dataType="wstr"
+                      length="101"
+                      name="PatientName" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[GenderTypeCode]"
+                      dataType="ui1"
+                      name="GenderTypeCode" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalServiceAmount]"
+                      dataType="i4"
+                      name="TotalServiceAmount" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReceptionDate_Shamsi_Unicode]"
+                      dataType="wstr"
+                      length="255"
+                      name="ReceptionDate_Shamsi_Unicode" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ClinicDB Data Flow Task\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ClinicDB Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[ReceptionDate_Shamsi]"
+                      cachedCodepage="1256"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="ReceptionDate_Shamsi"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[ReceptionDate_Shamsi]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\ClinicDB Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[ReceptionDate_Shamsi_Unicode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\ClinicDB Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[ReceptionDate_Shamsi_Unicode]"
+                      name="ReceptionDate_Shamsi_Unicode"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[ReceptionDate_Shamsi]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\ClinicDB Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ClinicDB Data Flow Task\DimDate Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="DimDate Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">DATES$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ClinicDB Data Flow Task\DimDate Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].Columns[Miladi]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[Miladi]"
+                      lineageId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].Columns[Miladi]"
+                      name="Miladi"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].Columns[Jalali_1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[Jalali_1]"
+                      length="255"
+                      lineageId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].Columns[Jalali_1]"
+                      name="Jalali_1"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[Miladi]"
+                      dataType="date"
+                      name="Miladi" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[Jalali_1]"
+                      dataType="wstr"
+                      length="255"
+                      name="Jalali_1" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[Jalali_2]"
+                      dataType="wstr"
+                      length="255"
+                      name="Jalali_2" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[Miladi1]"
+                      dataType="date"
+                      name="Miladi1" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[jyear]"
+                      dataType="wstr"
+                      length="255"
+                      name="jyear" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[mmonthN]"
+                      dataType="r8"
+                      name="mmonthN" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[jmonthN]"
+                      dataType="r8"
+                      name="jmonthN" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[mmonthT]"
+                      dataType="wstr"
+                      length="255"
+                      name="mmonthT" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[jmonthT]"
+                      dataType="wstr"
+                      length="255"
+                      name="jmonthT" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[mnime]"
+                      dataType="wstr"
+                      length="255"
+                      name="mnime" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[jnime]"
+                      dataType="wstr"
+                      length="255"
+                      name="jnime" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[JquarterN]"
+                      dataType="r8"
+                      name="JquarterN" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[JQuarterT]"
+                      dataType="wstr"
+                      length="255"
+                      name="JQuarterT" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[MquarterN]"
+                      dataType="r8"
+                      name="MquarterN" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[JWeekDay]"
+                      dataType="wstr"
+                      length="255"
+                      name="JWeekDay" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[MWeekDay]"
+                      dataType="wstr"
+                      length="255"
+                      name="MWeekDay" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[MWeekNum]"
+                      dataType="r8"
+                      name="MWeekNum" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].ExternalColumns[JWeekNum]"
+                      dataType="r8"
+                      name="JWeekNum" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Error Output].Columns[Miladi]"
+                      dataType="date"
+                      lineageId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Error Output].Columns[Miladi]"
+                      name="Miladi" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Error Output].Columns[Jalali_1]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Error Output].Columns[Jalali_1]"
+                      name="Jalali_1" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ClinicDB Data Flow Task\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[ClinicDW]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[ClinicDW]) [refTable]
+where [refTable].[PatientReceptionHeaderPK] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="PatientReceptionHeaderPK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DoctorPK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DoctorGroupTiltle" dataType="DT_WSTR" length="200" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DoctorName" dataType="DT_WSTR" length="201" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CityTitle" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PatientPK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PatientName" dataType="DT_WSTR" length="101" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="GenderTypeCode" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TotalServiceAmount" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ReceptionDate_Shamsi" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Miladi" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientReceptionHeaderPK]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ClinicDB Data Flow Task\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[REZA.dw]"
+                  connectionManagerRefId="Package.ConnectionManagers[REZA.dw]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ClinicDB Data Flow Task\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Lookup.Inputs[Lookup Input].Columns[PatientReceptionHeaderPK]"
+                      cachedDataType="i4"
+                      cachedName="PatientReceptionHeaderPK"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientReceptionHeaderPK]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">PatientReceptionHeaderPK</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\ClinicDB Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[PatientReceptionHeaderPK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\ClinicDB Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[PatientReceptionHeaderPK]"
+                      name="PatientReceptionHeaderPK"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">PatientReceptionHeaderPK</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\ClinicDB Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\ClinicDB Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ClinicDB Data Flow Task\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[ReceptionDate_Shamsi_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ReceptionDate_Shamsi_Unicode"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[ReceptionDate_Shamsi_Unicode]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[DoctorPK]"
+                      cachedDataType="i4"
+                      cachedName="DoctorPK"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[DoctorPK]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[DoctorGroupTiltle]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="DoctorGroupTiltle"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[DoctorGroupTiltle]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[DoctorName]"
+                      cachedDataType="wstr"
+                      cachedLength="201"
+                      cachedName="DoctorName"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[DoctorName]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[CityTitle]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="CityTitle"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[CityTitle]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[PatientPK]"
+                      cachedDataType="i4"
+                      cachedName="PatientPK"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[PatientPK]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[PatientName]"
+                      cachedDataType="wstr"
+                      cachedLength="101"
+                      cachedName="PatientName"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[PatientName]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[GenderTypeCode]"
+                      cachedDataType="ui1"
+                      cachedName="GenderTypeCode"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[GenderTypeCode]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[PatientReceptionHeaderPK]"
+                      cachedDataType="i4"
+                      cachedName="PatientReceptionHeaderPK"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[PatientReceptionHeaderPK]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[TotalServiceAmount]"
+                      cachedDataType="i4"
+                      cachedName="TotalServiceAmount"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[TotalServiceAmount]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[Jalali_1]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Jalali_1"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort.Outputs[Sort Output].Columns[Jalali_1]" />
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[Miladi]"
+                      cachedDataType="date"
+                      cachedName="Miladi"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort.Outputs[Sort Output].Columns[Miladi]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Miladi]"
+                      dataType="date"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Miladi]"
+                      name="Miladi">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[Miladi]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DoctorPK]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DoctorPK]"
+                      name="DoctorPK">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[DoctorPK]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DoctorGroupTiltle]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DoctorGroupTiltle]"
+                      name="DoctorGroupTiltle">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[DoctorGroupTiltle]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DoctorName]"
+                      dataType="wstr"
+                      length="201"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DoctorName]"
+                      name="DoctorName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[DoctorName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CityTitle]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CityTitle]"
+                      name="CityTitle">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[CityTitle]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PatientPK]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PatientPK]"
+                      name="PatientPK">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[PatientPK]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PatientName]"
+                      dataType="wstr"
+                      length="101"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PatientName]"
+                      name="PatientName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[PatientName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[GenderTypeCode]"
+                      dataType="ui1"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[GenderTypeCode]"
+                      name="GenderTypeCode">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[GenderTypeCode]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PatientReceptionHeaderPK]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PatientReceptionHeaderPK]"
+                      name="PatientReceptionHeaderPK">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[PatientReceptionHeaderPK]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[TotalServiceAmount]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[TotalServiceAmount]"
+                      name="TotalServiceAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[TotalServiceAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ReceptionDate_Shamsi_Unicode]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ReceptionDate_Shamsi_Unicode]"
+                      name="ReceptionDate_Shamsi_Unicode"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[ReceptionDate_Shamsi_Unicode]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ClinicDB Data Flow Task\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ClinicDB Data Flow Task\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort.Inputs[Sort Input].Columns[Miladi]"
+                      cachedDataType="date"
+                      cachedName="Miladi"
+                      lineageId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].Columns[Miladi]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort.Inputs[Sort Input].Columns[Jalali_1]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Jalali_1"
+                      lineageId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].Columns[Jalali_1]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort.Outputs[Sort Output].Columns[Miladi]"
+                      dataType="date"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort.Outputs[Sort Output].Columns[Miladi]"
+                      name="Miladi">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].Columns[Miladi]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort.Outputs[Sort Output].Columns[Jalali_1]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort.Outputs[Sort Output].Columns[Jalali_1]"
+                      name="Jalali_1"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output].Columns[Jalali_1]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ClinicDB Data Flow Task\Sort 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ClinicDB Data Flow Task\Sort 1.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Inputs[Sort Input].Columns[DoctorPK]"
+                      cachedDataType="i4"
+                      cachedName="DoctorPK"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[DoctorPK]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Inputs[Sort Input].Columns[DoctorGroupTiltle]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="DoctorGroupTiltle"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[DoctorGroupTiltle]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Inputs[Sort Input].Columns[DoctorName]"
+                      cachedDataType="wstr"
+                      cachedLength="201"
+                      cachedName="DoctorName"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[DoctorName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Inputs[Sort Input].Columns[CityTitle]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="CityTitle"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[CityTitle]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Inputs[Sort Input].Columns[PatientPK]"
+                      cachedDataType="i4"
+                      cachedName="PatientPK"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientPK]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Inputs[Sort Input].Columns[PatientName]"
+                      cachedDataType="wstr"
+                      cachedLength="101"
+                      cachedName="PatientName"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Inputs[Sort Input].Columns[GenderTypeCode]"
+                      cachedDataType="ui1"
+                      cachedName="GenderTypeCode"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[GenderTypeCode]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Inputs[Sort Input].Columns[PatientReceptionHeaderPK]"
+                      cachedDataType="i4"
+                      cachedName="PatientReceptionHeaderPK"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientReceptionHeaderPK]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Inputs[Sort Input].Columns[TotalServiceAmount]"
+                      cachedDataType="i4"
+                      cachedName="TotalServiceAmount"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[TotalServiceAmount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Inputs[Sort Input].Columns[ReceptionDate_Shamsi_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ReceptionDate_Shamsi_Unicode"
+                      lineageId="Package\ClinicDB Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[ReceptionDate_Shamsi_Unicode]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[DoctorPK]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[DoctorPK]"
+                      name="DoctorPK">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[DoctorPK]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[DoctorGroupTiltle]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[DoctorGroupTiltle]"
+                      name="DoctorGroupTiltle">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[DoctorGroupTiltle]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[DoctorName]"
+                      dataType="wstr"
+                      length="201"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[DoctorName]"
+                      name="DoctorName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[DoctorName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[CityTitle]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[CityTitle]"
+                      name="CityTitle">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[CityTitle]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[PatientPK]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[PatientPK]"
+                      name="PatientPK">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientPK]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[PatientName]"
+                      dataType="wstr"
+                      length="101"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[PatientName]"
+                      name="PatientName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[GenderTypeCode]"
+                      dataType="ui1"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[GenderTypeCode]"
+                      name="GenderTypeCode">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[GenderTypeCode]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[PatientReceptionHeaderPK]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[PatientReceptionHeaderPK]"
+                      name="PatientReceptionHeaderPK">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientReceptionHeaderPK]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[TotalServiceAmount]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[TotalServiceAmount]"
+                      name="TotalServiceAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[TotalServiceAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[ReceptionDate_Shamsi_Unicode]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output].Columns[ReceptionDate_Shamsi_Unicode]"
+                      name="ReceptionDate_Shamsi_Unicode"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\ClinicDB Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[ReceptionDate_Shamsi_Unicode]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="vw_doctor_performance Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[vw_doctor_performance]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[REZA.ClinicDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[REZA.ClinicDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[DoctorPK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[DoctorPK]"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[DoctorPK]"
+                      name="DoctorPK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[DoctorGroupTiltle]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[DoctorGroupTiltle]"
+                      length="200"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[DoctorGroupTiltle]"
+                      name="DoctorGroupTiltle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[DoctorName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[DoctorName]"
+                      length="201"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[DoctorName]"
+                      name="DoctorName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[CityTitle]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[CityTitle]"
+                      length="100"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[CityTitle]"
+                      name="CityTitle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientPK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[PatientPK]"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientPK]"
+                      name="PatientPK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[PatientName]"
+                      length="101"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientName]"
+                      name="PatientName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[GenderTypeCode]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[GenderTypeCode]"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[GenderTypeCode]"
+                      name="GenderTypeCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[ReceptionDate_Shamsi]"
+                      codePage="1256"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[ReceptionDate_Shamsi]"
+                      length="10"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[ReceptionDate_Shamsi]"
+                      name="ReceptionDate_Shamsi"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientReceptionHeaderPK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[PatientReceptionHeaderPK]"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[PatientReceptionHeaderPK]"
+                      name="PatientReceptionHeaderPK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[TotalServiceAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[TotalServiceAmount]"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].Columns[TotalServiceAmount]"
+                      name="TotalServiceAmount"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[DoctorPK]"
+                      dataType="i4"
+                      name="DoctorPK" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[DoctorGroupTiltle]"
+                      dataType="wstr"
+                      length="200"
+                      name="DoctorGroupTiltle" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[DoctorName]"
+                      dataType="wstr"
+                      length="201"
+                      name="DoctorName" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[CityTitle]"
+                      dataType="wstr"
+                      length="100"
+                      name="CityTitle" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[PatientPK]"
+                      dataType="i4"
+                      name="PatientPK" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[PatientName]"
+                      dataType="wstr"
+                      length="101"
+                      name="PatientName" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[GenderTypeCode]"
+                      dataType="ui1"
+                      name="GenderTypeCode" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[ReceptionDate_Shamsi]"
+                      codePage="1256"
+                      dataType="str"
+                      length="10"
+                      name="ReceptionDate_Shamsi" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[PatientReceptionHeaderPK]"
+                      dataType="i4"
+                      name="PatientReceptionHeaderPK" />
+                    <externalMetadataColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output].ExternalColumns[TotalServiceAmount]"
+                      dataType="i4"
+                      name="TotalServiceAmount" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[PatientReceptionHeaderPK]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[PatientReceptionHeaderPK]"
+                      name="PatientReceptionHeaderPK" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[DoctorPK]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[DoctorPK]"
+                      name="DoctorPK" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[DoctorGroupTiltle]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[DoctorGroupTiltle]"
+                      name="DoctorGroupTiltle" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[DoctorName]"
+                      dataType="wstr"
+                      length="201"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[DoctorName]"
+                      name="DoctorName" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[CityTitle]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[CityTitle]"
+                      name="CityTitle" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[PatientPK]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[PatientPK]"
+                      name="PatientPK" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[PatientName]"
+                      dataType="wstr"
+                      length="101"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[PatientName]"
+                      name="PatientName" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[GenderTypeCode]"
+                      dataType="ui1"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[GenderTypeCode]"
+                      name="GenderTypeCode" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[TotalServiceAmount]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[TotalServiceAmount]"
+                      name="TotalServiceAmount" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[ReceptionDate_Shamsi]"
+                      codePage="1256"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[ReceptionDate_Shamsi]"
+                      name="ReceptionDate_Shamsi" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\ClinicDB Data Flow Task.Paths[Data Conversion Output]"
+              endId="Package\ClinicDB Data Flow Task\Lookup.Inputs[Lookup Input]"
+              name="Data Conversion Output"
+              startId="Package\ClinicDB Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\ClinicDB Data Flow Task.Paths[Excel Source Output]"
+              endId="Package\ClinicDB Data Flow Task\Sort.Inputs[Sort Input]"
+              name="Excel Source Output"
+              startId="Package\ClinicDB Data Flow Task\DimDate Source.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\ClinicDB Data Flow Task.Paths[Lookup No Match Output]"
+              endId="Package\ClinicDB Data Flow Task\Sort 1.Inputs[Sort Input]"
+              name="Lookup No Match Output"
+              startId="Package\ClinicDB Data Flow Task\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\ClinicDB Data Flow Task.Paths[Merge Join Output]"
+              endId="Package\ClinicDB Data Flow Task\ClinicDW Destination.Inputs[OLE DB Destination Input]"
+              name="Merge Join Output"
+              startId="Package\ClinicDB Data Flow Task\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\ClinicDB Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\ClinicDB Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\ClinicDB Data Flow Task\vw_doctor_performance Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\ClinicDB Data Flow Task.Paths[Sort Output]"
+              endId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\ClinicDB Data Flow Task\Sort 1.Outputs[Sort Output]" />
+            <path
+              refId="Package\ClinicDB Data Flow Task.Paths[Sort Output1]"
+              endId="Package\ClinicDB Data Flow Task\Merge Join.Inputs[Merge Join Right Input]"
+              name="Sort Output"
+              startId="Package\ClinicDB Data Flow Task\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="192,41.6"
+          Id="Package\ClinicDB Data Flow Task"
+          TopLeft="77.6428572964303,73.5588234697556" />
+        <NodeLayout
+          Size="236,41.6"
+          Id="Package\Analysis Services Processing Task"
+          TopLeft="72.1428572964303,161.352941035038" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\ClinicDB Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\ClinicDB Data Flow Task\Lookup"
+          TopLeft="542.777778933209,33.6470587940364" />
+        <NodeLayout
+          Size="228,41.6"
+          Id="Package\ClinicDB Data Flow Task\vw_doctor_performance Source"
+          TopLeft="32.7777778475534,29.3986927846884" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\ClinicDB Data Flow Task\DimDate Source"
+          TopLeft="270.158730733827,190.211764550374" />
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\ClinicDB Data Flow Task\Sort"
+          TopLeft="540.158731308586,198.164705710758" />
+        <NodeLayout
+          Size="106.4,41.6"
+          Id="Package\ClinicDB Data Flow Task\Sort 1"
+          TopLeft="545.15873131923,116.341176370714" />
+        <EdgeLayout
+          Id="Package\ClinicDB Data Flow Task.Paths[Lookup No Match Output]"
+          TopLeft="598.76825512622,75.2470587940364">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.094117576678"
+              Start="0,0"
+              End="0,33.594117576678">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.594117576678" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,10.992371288339,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ClinicDB Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="424.558730733827,214.988235130566">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="115.600000574759,0"
+              Start="0,0"
+              End="108.100000574759,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="108.100000574759,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\ClinicDB Data Flow Task\Data Conversion"
+          TopLeft="321.428572112808,26.3398692579578" />
+        <EdgeLayout
+          Id="Package\ClinicDB Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="260.777777847553,48.6692810213231">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="60.6507942652551,0"
+              Start="0,0"
+              End="53.1507942652551,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="53.1507942652551,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ClinicDB Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="476.628572112808,50.7934640259971">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="66.149206820401,0"
+              Start="0,0"
+              End="58.649206820401,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="58.649206820401,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\ClinicDB Data Flow Task\Merge Join"
+          TopLeft="693.650795127394,184.379084805705" />
+        <EdgeLayout
+          Id="Package\ClinicDB Data Flow Task.Paths[Sort Output]"
+          TopLeft="598.35873131923,157.941176370714">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="160.092063808164,26.4379084349905"
+              Start="0,0"
+              End="160.092063808164,18.9379084349905">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.21895421749524" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.21895421749524"
+                    Point2="0,13.2189542174952"
+                    Point3="4,13.2189542174952" />
+                  <mssgle:LineSegment
+                    End="156.092063808164,13.2189542174952" />
+                  <mssgle:CubicBezierSegment
+                    Point1="156.092063808164,13.2189542174952"
+                    Point2="160.092063808164,13.2189542174952"
+                    Point3="160.092063808164,17.2189542174952" />
+                  <mssgle:LineSegment
+                    End="160.092063808164,18.9379084349905" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ClinicDB Data Flow Task.Paths[Sort Output1]"
+          TopLeft="637.758731308586,218.964705710758">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="55.8920638188076,-13.7856209050528"
+              Start="0,0"
+              End="48.3920638188076,-13.7856209050528">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="23.9460319094038,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.9460319094038,0"
+                    Point2="27.9460319094038,0"
+                    Point3="27.9460319094038,-4" />
+                  <mssgle:LineSegment
+                    End="27.9460319094038,-9.78562090505278" />
+                  <mssgle:CubicBezierSegment
+                    Point1="27.9460319094038,-9.78562090505278"
+                    Point2="27.9460319094038,-13.7856209050528"
+                    Point3="31.9460319094038,-13.7856209050528" />
+                  <mssgle:LineSegment
+                    End="48.3920638188076,-13.7856209050528" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="176,41.6"
+          Id="Package\ClinicDB Data Flow Task\ClinicDW Destination"
+          TopLeft="861.428573082567,183.529411603835" />
+        <EdgeLayout
+          Id="Package\ClinicDB Data Flow Task.Paths[Merge Join Output]"
+          TopLeft="823.250795127394,204.75424820477">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="38.1777779551726,0"
+              Start="0,0"
+              End="30.6777779551726,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="30.6777779551726,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ClinicDB Data Flow Task\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[ClinicDW]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ClinicDB Data Flow Task\vw_doctor_performance Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ClinicDB Data Flow Task\DimDate Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ClinicDB Data Flow Task\ClinicDW Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
