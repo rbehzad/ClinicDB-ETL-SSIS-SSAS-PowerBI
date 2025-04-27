@@ -1,0 +1,372 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1600,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/REZA;ClinicDB",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "REZA",
+            "database": "ClinicDB"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "UsernamePassword",
+          "kind": "SQL",
+          "path": "reza;ClinicDB",
+          "Username": "MaktabUser2",
+          "EncryptConnection": false
+        }
+      },
+      {
+        "type": "structured",
+        "name": "SQL/REZA;dw",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "REZA",
+            "database": "dw"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "UsernamePassword",
+          "kind": "SQL",
+          "path": "reza;dw",
+          "Username": "MaktabUser2",
+          "EncryptConnection": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "DoctorF",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Total Reception",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Total Reception]"
+          },
+          {
+            "type": "calculated",
+            "name": "F",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": [
+              "",
+              "var q1 = PERCENTILE.INC(DoctorF[Total Reception], 0.20)",
+              "var q2 = PERCENTILE.INC(DoctorF[Total Reception], 0.40)",
+              "var q3 = PERCENTILE.INC(DoctorF[Total Reception], 0.60)",
+              "var q4 = PERCENTILE.INC(DoctorF[Total Reception], 0.80)",
+              "return INT(",
+              "\tIF(DoctorF[Total Reception] < q1, 1,",
+              "\t\tIF(DoctorF[Total Reception] < q2, 2,",
+              "\t\t\tIF(DoctorF[Total Reception] < q3, 3,",
+              "\t\t\t\tIF(DoctorF[Total Reception] < q4, 4, 5)",
+              "\t\t\t)",
+              "\t\t)",
+              "\t)",
+              ")",
+              ""
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "DoctorPK",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "ClinicDW[DoctorPK]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "DoctorName",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "ClinicDW[DoctorName]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                " ",
+                "SUMMARIZE(",
+                "    ClinicDW,",
+                "    ClinicDW[DoctorPK],",
+                "    ClinicDW[DoctorName],",
+                "    \"Total Reception\", COUNT(ClinicDW[PatientReceptionHeaderPK])",
+                ")"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DoctorR",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Last Reception",
+            "dataType": "dateTime",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Last Reception]"
+          },
+          {
+            "type": "calculated",
+            "name": "R",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": [
+              "",
+              "var MaxDate = MAX(DoctorR[Last Reception])",
+              "var DiffDate = DATEDIFF(DoctorR[Last Reception], MaxDate, DAY)",
+              "",
+              "return",
+              "IF(DiffDate > 6*30, 1,",
+              "\tIF(DiffDate > 4*30, 2,",
+              "\t\tIF(DiffDate > 30, 3,",
+              "\t\t\tIF(DiffDate > 7, 4, 5)",
+              "\t\t)",
+              "\t)",
+              ")"
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "DoctorPK",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "ClinicDW[DoctorPK]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "DoctorName",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "ClinicDW[DoctorName]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                " ",
+                "SUMMARIZE(",
+                "    ClinicDW,",
+                "    ClinicDW[DoctorPK], ",
+                "    ClinicDW[DoctorName],",
+                "    \"Last Reception\", MAX(ClinicDW[Miladi])",
+                ")"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DoctorM",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Total Revenue",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Total Revenue]"
+          },
+          {
+            "type": "calculated",
+            "name": "M",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": [
+              "",
+              "var q1 = PERCENTILE.INC(DoctorM[Total Revenue], 0.20)",
+              "var q2 = PERCENTILE.INC(DoctorM[Total Revenue], 0.40)",
+              "var q3 = PERCENTILE.INC(DoctorM[Total Revenue], 0.60)",
+              "var q4 = PERCENTILE.INC(DoctorM[Total Revenue], 0.80)",
+              "return INT(",
+              "\tIF(DoctorM[Total Revenue] < q1, 1,",
+              "\t\tIF(DoctorM[Total Revenue] < q2, 2,",
+              "\t\t\tIF(DoctorM[Total Revenue] < q3, 3,",
+              "\t\t\t\tIF(DoctorM[Total Revenue] < q4, 4, 5)",
+              "\t\t\t)",
+              "\t\t)",
+              "\t)",
+              ")"
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "IsParetoDoctor",
+            "dataType": "boolean",
+            "isDataTypeInferred": true,
+            "expression": [
+              "",
+              "VAR CurrentRow = DoctorM[RevenueShareOfTotal]",
+              "VAR CumulativePercentage = ",
+              "\tSUMX(",
+              "\t    FILTER(",
+              "\t        DoctorM,",
+              "\t        DoctorM[RevenueShareOfTotal] > CurrentRow",
+              "\t    ),",
+              "\t    DoctorM[RevenueShareOfTotal]",
+              "\t)",
+              "RETURN",
+              "IF (",
+              "\tCumulativePercentage < 0.80,",
+              "\tTRUE(),",
+              "\tFALSE()",
+              ")"
+            ],
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          },
+          {
+            "type": "calculated",
+            "name": "RevenueShareOfTotal",
+            "dataType": "double",
+            "isDataTypeInferred": true,
+            "expression": [
+              "",
+              "DoctorM[Total Revenue] / SUM(DoctorM[Total Revenue])"
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "DoctorPK",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "ClinicDW[DoctorPK]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "DoctorName",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "ClinicDW[DoctorName]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "",
+                "SUMMARIZE(",
+                "    ClinicDW,",
+                "    ClinicDW[DoctorPK], ",
+                "    ClinicDW[DoctorName],",
+                "    \"Total Revenue\", SUM(ClinicDW[TotalServiceAmount])",
+                ")"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "ClinicDW",
+        "columns": [
+          {
+            "name": "PatientReceptionHeaderPK",
+            "dataType": "int64",
+            "sourceColumn": "PatientReceptionHeaderPK"
+          },
+          {
+            "name": "Miladi",
+            "dataType": "dateTime",
+            "sourceColumn": "Miladi"
+          },
+          {
+            "name": "DoctorPK",
+            "dataType": "int64",
+            "sourceColumn": "DoctorPK"
+          },
+          {
+            "name": "DoctorGroupTiltle",
+            "dataType": "string",
+            "sourceColumn": "DoctorGroupTiltle"
+          },
+          {
+            "name": "DoctorName",
+            "dataType": "string",
+            "sourceColumn": "DoctorName"
+          },
+          {
+            "name": "CityTitle",
+            "dataType": "string",
+            "sourceColumn": "CityTitle"
+          },
+          {
+            "name": "PatientPK",
+            "dataType": "int64",
+            "sourceColumn": "PatientPK"
+          },
+          {
+            "name": "PatientName",
+            "dataType": "string",
+            "sourceColumn": "PatientName"
+          },
+          {
+            "name": "GenderTypeCode",
+            "dataType": "int64",
+            "sourceColumn": "GenderTypeCode"
+          },
+          {
+            "name": "TotalServiceAmount",
+            "dataType": "int64",
+            "sourceColumn": "TotalServiceAmount"
+          },
+          {
+            "name": "ReceptionDate_Shamsi_Unicode",
+            "dataType": "string",
+            "sourceColumn": "ReceptionDate_Shamsi_Unicode"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/REZA;dw\",",
+                "    dbo_ClinicDW = Source{[Schema=\"dbo\",Item=\"ClinicDW\"]}[Data]",
+                "in",
+                "    dbo_ClinicDW"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "700"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}

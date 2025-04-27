@@ -1,0 +1,16 @@
+F:\dev-maktab\تمرین پنجشنبه7\tam7_model\bin\Model.asdatabase
+F:\dev-maktab\تمرین پنجشنبه7\tam7_model\bin\Model.deploymenttargets
+F:\dev-maktab\تمرین پنجشنبه7\tam7_model\bin\Model.deploymentoptions
+F:\dev-maktab\تمرین پنجشنبه7\tam7_model\obj\Development\tam7_model.smproj.AssemblyReference.cache
+F:\dev-maktab\تمرین پنجشنبه7\tam7_model\obj\Development\tam7_model.smproj.CoreCompileInputs.cache
+F:\dev-maktab\تمرین پنجشنبه7\tam7_model\obj\Development\Model.asdatabase
+F:\dev-maktab\تمرین پنجشنبه7\tam7_model\obj\Development\Model.deploymentoptions
+F:\dev-maktab\تمرین پنجشنبه7\tam7_model\obj\Development\Model.deploymenttargets
+F:\dev-maktab\تمرین پنجشنبه7\ClinicDB_SSAS\bin\Model.asdatabase
+F:\dev-maktab\تمرین پنجشنبه7\ClinicDB_SSAS\bin\Model.deploymenttargets
+F:\dev-maktab\تمرین پنجشنبه7\ClinicDB_SSAS\bin\Model.deploymentoptions
+F:\dev-maktab\تمرین پنجشنبه7\ClinicDB_SSAS\obj\Development\ClinicDB_SSAS.smproj.AssemblyReference.cache
+F:\dev-maktab\تمرین پنجشنبه7\ClinicDB_SSAS\obj\Development\ClinicDB_SSAS.smproj.CoreCompileInputs.cache
+F:\dev-maktab\تمرین پنجشنبه7\ClinicDB_SSAS\obj\Development\Model.asdatabase
+F:\dev-maktab\تمرین پنجشنبه7\ClinicDB_SSAS\obj\Development\Model.deploymentoptions
+F:\dev-maktab\تمرین پنجشنبه7\ClinicDB_SSAS\obj\Development\Model.deploymenttargets
